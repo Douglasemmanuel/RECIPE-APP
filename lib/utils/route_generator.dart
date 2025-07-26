@@ -1,0 +1,89 @@
+
+import 'package:flutter/material.dart';
+import '../screens/home_screen.dart';
+import '../screens/recipe_list_screen.dart';
+import '../screens/favourites_screen.dart';
+import '../screens/profile_screen.dart';
+import '../screens/recipe_details_screen.dart';
+import '../models/recipe.dart';
+import '../../widgets/common/responsive_navigation.dart';
+
+class RouteGenerator {
+  static const String home = '/';
+  static const String recipes = '/recipes';
+  static const String favorites = '/favorites';
+  static const String profile = '/profile';
+  static const String recipedetails = '/recipe-details';
+
+  static Route<dynamic> generateRoute(RouteSettings settings) {
+    switch (settings.name) {
+      case home:
+        return MaterialPageRoute(builder: (_) => HomeScreen());
+      case recipes:
+        return MaterialPageRoute(builder: (_) => RecipeListScreen());
+      case favorites:
+        return MaterialPageRoute(builder: (_) => FavoritesScreen());
+      case profile:
+        return MaterialPageRoute(builder: (_) => ProfileScreen());
+      case recipedetails:
+        final recipeId = settings.arguments as String;
+        return MaterialPageRoute(
+          builder: (_) => RecipeDetailsScreen(recipeId: recipeId),
+        );
+      default:
+        return _errorRoute();
+    }
+  }
+
+  // This method is outside the generateRoute method — at class level!
+  static Route<dynamic> _errorRoute() {
+    return MaterialPageRoute(
+      builder: (_) => Scaffold(
+        appBar: AppBar(title: const Text('Error')),
+        body: const Center(child: Text('Page not found')),
+      ),
+    );
+  }
+}
+
+
+// class RouteGenerator {
+//   static const String home = '/';
+//   static const String recipes = '/recipes';
+//   static const String favorites = '/favorites';
+//   static const String profile = '/profile';
+//   static const String recipedetails = '/recipe-details';
+
+//   static Route<dynamic> generateRoute(RouteSettings settings) {
+//     switch (settings.name) {
+//       case home:
+//         return MaterialPageRoute(builder: (_) => ResponsiveNavigation(initialIndex: 0));
+//       case recipes:
+//         return MaterialPageRoute(builder: (_) => ResponsiveNavigation(initialIndex: 1));
+//       case favorites:
+//         return MaterialPageRoute(builder: (_) => ResponsiveNavigation(initialIndex: 2));
+//       case profile:
+//         return MaterialPageRoute(builder: (_) => ResponsiveNavigation(initialIndex: 3));
+//       case recipedetails:
+//         final recipeId = settings.arguments as String;
+//         return MaterialPageRoute(
+//           builder: (_) => RecipeDetailsScreen(recipeId: recipeId),
+//         );
+//       default:
+//         return _errorRoute();
+//     }
+//   }
+
+//   static Route<dynamic> _errorRoute() {
+//     return MaterialPageRoute(
+//       builder: (_) => Scaffold(
+//         appBar: AppBar(title: const Text('Error')),
+//         body: const Center(child: Text('Page not found')),
+//       ),
+//     );
+//   }
+// }
+
+
+
+
