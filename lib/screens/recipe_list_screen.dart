@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../data/receipe_data.dart';
 import '../models/recipe.dart';
+import '../utils/route_generator.dart';
 class RecipeListScreen extends StatelessWidget {
   // Sample recipe data
 
@@ -48,6 +49,10 @@ class RecipeListScreen extends StatelessWidget {
 
             trailing: Icon(Icons.arrow_forward_ios),
             onTap: () {
+                    Navigator.of(context, rootNavigator: true).pushNamed(
+      RouteGenerator.recipedetails,
+      arguments: recipe.id, // pass your ID here
+    );
               // TODO: Navigate to recipe details screen
             },
           );

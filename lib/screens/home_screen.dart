@@ -127,10 +127,10 @@ class HomeScreen extends StatelessWidget {
               child: RecipeCard(
                 recipe: recipe,
                 onTap: () {
-                Navigator.of(context).pushNamed(
-        RouteGenerator.recipedetails,
-        arguments: recipe.id,
-      );
+                  Navigator.of(context, rootNavigator: true).pushNamed(
+      RouteGenerator.recipedetails,
+      arguments: recipe.id, // pass your ID here
+    );
 
           },
               ),
@@ -146,12 +146,61 @@ class HomeScreen extends StatelessWidget {
     
   
   Widget _buildQuickCategories(BuildContext context) {
-    return Container(
-      height: 100,
-      color: Colors.grey.shade200,
-      child: Center(child: Text('Quick Categories Placeholder')),
-    );
-  }
+  final categories = [
+    {'label': 'Breakfast', 'route': RouteGenerator.recipes},
+    {'label': 'Lunch', 'route': RouteGenerator.recipes},
+    {'label': 'Dinner', 'route': RouteGenerator.recipes},
+    {'label': 'Snacks', 'route': RouteGenerator.recipes},
+    {'label': 'Dessert', 'route': RouteGenerator.recipes},
+  ];
+
+  return Container(
+    // color: Colors.grey.shade200,
+    padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Quick Categories',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: 12),
+        SizedBox(
+          height: 50,
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            itemCount: categories.length,
+            separatorBuilder: (_, __) => const SizedBox(width: 12),
+            itemBuilder: (context, index) {
+              final category = categories[index];
+              return TextButton(
+                onPressed: () {
+                  Navigator.of(context, rootNavigator: true).pushNamed(category['route']!);
+                },
+                style: TextButton.styleFrom(
+                backgroundColor: const Color(0xFFD2B48C),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5), // ✅ No const here
+                ),
+              ),
+
+                child: Text(
+                  category['label']!,
+                  style: const TextStyle(color: Colors.black),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
 
  Widget _buildRecentlyViewed(BuildContext context) {
   return Container(
@@ -168,15 +217,25 @@ class HomeScreen extends StatelessWidget {
   
   void _navigateToShoppingList(BuildContext context) {
     // Navigate to shopping list
+     Navigator.of(context, rootNavigator: true).pushNamed(
+      RouteGenerator.cart,
+    );
   }
   
   void _exploreRecipes(BuildContext context) {
     // Navigate to recipe list
+     Navigator.of(context, rootNavigator: true).pushNamed(
+      RouteGenerator.recipes,
+    );
   }
   
   void _viewAllRecipes(BuildContext context) {
     // Navigate to all recipes
-    Navigator.pushReplacementNamed(context, RouteGenerator.recipes , arguments:1);
+    Navigator.of(context, rootNavigator: true).pushNamed(
+      RouteGenerator.recipes,
+      // arguments: recipe.id, // pass your ID here
+    );
+    
    
 
   }

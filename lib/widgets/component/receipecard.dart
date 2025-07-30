@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../models/recipe.dart';
-
-class RecipeCard extends StatelessWidget {
+import '../../utils/favourites.dart';
+class RecipeCard extends StatefulWidget {
   final Recipe recipe;
   final VoidCallback? onTap;
 
@@ -10,6 +10,26 @@ class RecipeCard extends StatelessWidget {
     required this.recipe,
     this.onTap,
   }) : super(key: key);
+
+  @override
+  State<RecipeCard> createState() => _RecipeCardState();
+}
+
+class _RecipeCardState extends State<RecipeCard> {
+    late bool isFavorite;
+
+  @override
+  void initState() {
+    super.initState();
+    isFavorite = FavoritesManager().isFavorite(widget.recipe);
+  }
+
+  void _toggleFavorite() {
+    setState(() {
+      FavoritesManager().toggleFavorite(widget.recipe);
+      isFavorite = !isFavorite;
+    });
+  }
 
   Widget _buildDifficultyButton(String difficulty) {
     Color color;
@@ -64,7 +84,7 @@ class RecipeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: widget.onTap,
       child: Card(
         elevation: 3,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -72,27 +92,46 @@ class RecipeCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Image
-            AspectRatio(
-              aspectRatio: 4 / 3,
-              child: Image.network(
-                recipe.imageUrl,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) => Container(
-                  color: Colors.grey[300],
-                  alignment: Alignment.center,
-                  child: const Icon(Icons.image_not_supported, size: 50, color: Colors.grey),
+            // Image with heart icon on top right
+            Stack(
+              children: [
+                AspectRatio(
+                  aspectRatio: 4 / 3,
+                  child: Image.network(
+                    widget.recipe.imageUrl,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) => Container(
+                      color: Colors.grey[300],
+                      alignment: Alignment.center,
+                      child: const Icon(Icons.image_not_supported, size: 50, color: Colors.grey),
+                    ),
+                  ),
                 ),
-              ),
+                Positioned(
+                  top: 8,
+                  right: 8,
+                  child: GestureDetector(
+                    onTap:  _toggleFavorite,
+                    child: CircleAvatar(
+                      backgroundColor: Colors.white.withOpacity(0.7),
+                      child: Icon(
+                        isFavorite ? Icons.favorite : Icons.favorite_border,
+                        color: isFavorite ? Colors.red : Colors.black,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
+
+            // Details
             Padding(
               padding: const EdgeInsets.all(12),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Title
                   Text(
-                    recipe.title,
+                    widget.recipe.title,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
@@ -101,30 +140,26 @@ class RecipeCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 6),
 
-                  // Difficulty button and Cooking time
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      _buildDifficultyButton(recipe.difficulty),
+                      _buildDifficultyButton(widget.recipe.difficulty),
                       Row(
                         children: [
                           const Icon(Icons.schedule, size: 16, color: Colors.grey),
                           const SizedBox(width: 4),
-                          Text('${recipe.cookTimeMinutes} mins',
+                          Text('${widget.recipe.cookTimeMinutes} mins',
                               style: const TextStyle(color: Colors.grey)),
                         ],
                       ),
                     ],
                   ),
-
                   const SizedBox(height: 6),
-
-                  // Rating and review count
                   Row(
                     children: [
-                      _buildRatingStars(recipe.rating),
+                      _buildRatingStars(widget.recipe.rating),
                       const SizedBox(width: 8),
-                      Text('(${recipe.reviewCount})',
+                      Text('(${widget.recipe.reviewCount})',
                           style: const TextStyle(color: Colors.grey)),
                     ],
                   ),
@@ -137,3 +172,4 @@ class RecipeCard extends StatelessWidget {
     );
   }
 }
+

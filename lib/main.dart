@@ -12,8 +12,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Recipe Book',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.orange),
-      initialRoute: RouteGenerator.home,
+      initialRoute: RouteGenerator.initial,
       onGenerateRoute: RouteGenerator.generateRoute,
       // home:  ResponsiveNavigation(),  // <-- set HomeScreen as the intro/home screen
       
