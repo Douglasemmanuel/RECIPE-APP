@@ -6,8 +6,7 @@ import '../../models/recipe.dart';
 import '../utils/route_generator.dart';
 
 class FavoritesScreen extends StatelessWidget {
-  const FavoritesScreen({Key? key}) : super(key: key);
-
+  
   @override
   Widget build(BuildContext context) {
     final List<Recipe> favorites = FavoritesManager().favorites;

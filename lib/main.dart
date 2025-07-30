@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import '../widgets/common/responsive_navigation.dart';
 import '../../utils/route_generator.dart';
+import '../../utils/favourites.dart'; // correct import
+import '../models/recipe.dart';
 
 void main() {
+   WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const MyApp());
 }
 
