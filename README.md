@@ -31,7 +31,7 @@ A Flutter-based recipe app that allows users to explore, save, and share their f
 
 ```bash
 git clone git@github.com:Douglasemmanuel/RECIPE-APP.git
-cd flutter-calculator
+cd recipe_app
 
 2.  Open the Folder:
 ```bash
