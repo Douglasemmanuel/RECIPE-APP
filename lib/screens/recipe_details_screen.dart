@@ -2,11 +2,11 @@
 import 'package:flutter/material.dart';
 import '../models/recipe.dart';
 import '../data/receipe_data.dart'; // Your sampleRecipes list
-
+import '../../utils/route_generator.dart';
 import 'package:flutter/material.dart';
 import '../models/recipe.dart';
 import '../data/receipe_data.dart'; // your sampleRecipes import
-
+import '../../utils/cart.dart';
 class RecipeDetailsScreen extends StatelessWidget {
   final String recipeId;
 
@@ -151,6 +151,20 @@ class RecipeDetailsScreen extends StatelessWidget {
                             ),
                           ],
                         ),
+                                                Align(
+                          alignment: AlignmentDirectional.centerStart,
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 4.0),
+                            child: Text(
+                              '\u20A6${recipe.price}',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.green[700],
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -225,16 +239,21 @@ class RecipeDetailsScreen extends StatelessWidget {
 
             // Add to Cart Button
             SizedBox(
+              height:50,
               width: double.infinity,
               child: ElevatedButton.icon(
                 icon: const Icon(Icons.shopping_cart),
                 label: const Text('Add to Cart'),
                 style: ElevatedButton.styleFrom(
+                   backgroundColor: Colors.orange, // 🔶 Button background color
+                   foregroundColor: Colors.white,  
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 ),
                 onPressed: () {
+                  CartManager().addToCart(recipe);
+                   Navigator.of(context, rootNavigator: true).pushNamed(RouteGenerator.cart);
                   // TODO: Replace with your add to cart logic
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text('${recipe.title} added to cart!')),

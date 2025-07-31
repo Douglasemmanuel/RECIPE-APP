@@ -203,7 +203,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Navigator.of(context, rootNavigator: true).pushNamed(category['route']!);
                   },
                   style: TextButton.styleFrom(
-                    backgroundColor: const Color(0xFFD2B48C),
+                    backgroundColor: const Color(0xFFFFFDD0) ,
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5),

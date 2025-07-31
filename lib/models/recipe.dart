@@ -18,6 +18,7 @@ class Recipe {
   final int reviewCount;
   final String category;
   final DateTime createdAt;
+  final double price;
   
   Recipe({
     required this.id,
@@ -37,6 +38,7 @@ class Recipe {
     this.reviewCount = 0,
     required this.category,
     required this.createdAt,
+    required this.price,
   });
   
   // Helper methods
@@ -74,6 +76,7 @@ class Recipe {
       reviewCount: reviewCount,
       category: category,
       createdAt: createdAt,
+      price:price,
     );
   }
 }

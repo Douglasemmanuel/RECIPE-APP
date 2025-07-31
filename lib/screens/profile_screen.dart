@@ -8,8 +8,8 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  final TextEditingController _nameController = TextEditingController(text: 'John Doe');
-  final TextEditingController _emailController = TextEditingController(text: 'john.doe@example.com');
+  final TextEditingController _nameController = TextEditingController(text: 'Douglas Emmanuel');
+  final TextEditingController _emailController = TextEditingController(text: 'emmnaueldouglas2121@gmail.com');
 
   @override
   void dispose() {
@@ -46,7 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             CircleAvatar(
               radius: 60,
-              backgroundImage: NetworkImage('https://i.pravatar.cc/150?img=3'),
+              backgroundImage: NetworkImage('../../assets/images/Douglas.jpeg'),
             ),
             SizedBox(height: 20),
             _buildTextField(label: 'Name', controller: _nameController),
@@ -54,9 +54,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
             _buildTextField(label: 'Email', controller: _emailController),
             SizedBox(height: 32),
             ElevatedButton(
-              onPressed: _saveProfile,
-              child: Text('Save Changes'),
+            onPressed: _saveProfile,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.orange,       
+              foregroundColor: Colors.white,        
+              padding: EdgeInsets.symmetric(vertical: 14, horizontal: 24),
+              textStyle: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
             ),
+            child: Text('Save Changes'),
+          ),
+
             Spacer(),
             OutlinedButton.icon(
               onPressed: _logout,
