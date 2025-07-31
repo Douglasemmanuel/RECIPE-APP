@@ -9,7 +9,8 @@ class FavoritesScreen extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    final List<Recipe> favorites = FavoritesManager().favorites;
+    final List<Recipe> favorites = FavoritesManager.instance.favorites;
+
 
     return Scaffold(
       appBar: AppBar(

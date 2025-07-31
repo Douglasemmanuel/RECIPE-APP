@@ -9,12 +9,12 @@ A Flutter-based recipe app that allows users to explore, save, and share their f
 - **Favorites**: Save your favorite recipes for quick access later.
 - **Responsive Design**: The app adapts to different screen sizes, providing an optimal user experience on mobile, tablet, and desktop devices.
 - **User  Profiles**: Create and manage user profiles to personalize the experience.
+- **Add To Cart**: Create and manage user profiles to personalize the experience.
 
-## Screenshots
+## Video Work Flow
 
-![Home Screen](screenshots/home_screen.png)
-![Recipe Detail](screenshots/recipe_detail.png)
-![Favorites](screenshots/favorites.png)
+![Recipe Book App](https://drive.google.com/file/d/1jKW3BI0i01A6coKk9YO3dL7n3ylaTraB/view?usp=sharing)
+
 
 ## Getting Started
 

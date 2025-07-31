@@ -1,69 +1,42 @@
-// import '../models/recipe.dart';
-// // import 'package:shared_preferences/shared_preferences.dart';
-// class FavoritesManager {
-//   static final FavoritesManager _instance = FavoritesManager._internal();
-//   factory FavoritesManager() => _instance;
-//   FavoritesManager._internal();
-
-//   final List<Recipe> _favorites = [];
-
-//   List<Recipe> get favorites => List.unmodifiable(_favorites);
-
-//   void toggleFavorite(Recipe recipe) {
-//     if (isFavorite(recipe)) {
-//       _favorites.removeWhere((r) => r.id == recipe.id);
-//     } else {
-//       _favorites.add(recipe);
-//     }
-//   }
-
-//   bool isFavorite(Recipe recipe) {
-//     return _favorites.any((r) => r.id == recipe.id);
-//   }
-// }
-
-
-
-
 import '../models/recipe.dart';
 import '../models/user_preferences.dart';
 
+
+
+
+
 class FavoritesManager {
-  static final FavoritesManager _instance = FavoritesManager._internal();
-  factory FavoritesManager() => _instance;
+  // ✅ Singleton instance
+  static final FavoritesManager instance = FavoritesManager._internal();
+
   FavoritesManager._internal();
 
   final List<Recipe> _favorites = [];
 
-  List<Recipe> get favorites => List.unmodifiable(_favorites);
+  List<Recipe> get favorites => _favorites;
 
-  /// Load favorites from local storage and match them with all recipes
-  Future<void> loadFavorites(List<Recipe> allRecipes) async {
-    final favoriteIds = await UserPreferences.getFavorites();
-    _favorites.clear();
-    _favorites.addAll(
-      allRecipes.where((recipe) => favoriteIds.contains(recipe.id)),
-    );
+  bool isFavorite(String recipeId) {
+    return _favorites.any((r) => r.id == recipeId);
   }
 
-  Future<void> toggleFavorite(Recipe recipe) async {
-    if (isFavorite(recipe)) {
+  void toggleFavorite(Recipe recipe) async {
+    if (isFavorite(recipe.id)) {
       _favorites.removeWhere((r) => r.id == recipe.id);
     } else {
       _favorites.add(recipe);
     }
-
-    await _saveFavoritesToPreferences();
+    await save();
   }
 
-  bool isFavorite(Recipe recipe) {
-    return _favorites.any((r) => r.id == recipe.id);
+  Future<void> load(List<Recipe> allRecipes) async {
+    final ids = await UserPreferences.getFavorites();
+    _favorites
+      ..clear()
+      ..addAll(allRecipes.where((r) => ids.contains(r.id)));
   }
 
-  Future<void> _saveFavoritesToPreferences() async {
-    final favoriteIds = _favorites.map((r) => r.id).toList();
-    await UserPreferences.saveFavorites(favoriteIds);
+  Future<void> save() async {
+    final ids = _favorites.map((r) => r.id).toList();
+    await UserPreferences.saveFavorites(ids);
   }
 }
-
-

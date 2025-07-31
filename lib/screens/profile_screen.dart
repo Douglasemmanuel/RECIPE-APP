@@ -46,7 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             CircleAvatar(
               radius: 60,
-              backgroundImage: NetworkImage('../../assets/images/Douglas.jpeg'),
+              backgroundImage: AssetImage('assets/images/Douglas.jpeg'),
             ),
             SizedBox(height: 20),
             _buildTextField(label: 'Name', controller: _nameController),

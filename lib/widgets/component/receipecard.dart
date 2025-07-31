@@ -17,16 +17,21 @@ class RecipeCard extends StatefulWidget {
 
 class _RecipeCardState extends State<RecipeCard> {
     late bool isFavorite;
+  
+
 
   @override
   void initState() {
     super.initState();
-    isFavorite = FavoritesManager().isFavorite(widget.recipe);
+   isFavorite = FavoritesManager.instance.isFavorite(widget.recipe.id);
+
+
   }
 
   void _toggleFavorite() {
     setState(() {
-      FavoritesManager().toggleFavorite(widget.recipe);
+      FavoritesManager.instance.toggleFavorite(widget.recipe);
+
       isFavorite = !isFavorite;
     });
   }

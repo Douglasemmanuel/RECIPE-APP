@@ -1,5 +1,7 @@
 // models/recipe.dart
 import 'dart:convert';
+import './nutrition_info.dart' ;
+import './ingredient.dart' ;
 class Recipe {
   final String id;
   final String title;
@@ -81,66 +83,6 @@ class Recipe {
   }
 }
 
-// models/ingredient.dart
-class Ingredient {
-  final String name;
-  final double amount;
-  final String unit;
-  final bool isOptional;
-  
-  Ingredient({
-    required this.name,
-    required this.amount,
-    required this.unit,
-    this.isOptional = false,
-  });
-  
-  Ingredient scale(double factor) {
-    return Ingredient(
-      name: name,
-      amount: amount * factor,
-      unit: unit,
-      isOptional: isOptional,
-    );
-  }
-  
-  String get displayText {
-    final amountText = amount == amount.round() 
-        ? amount.round().toString()
-        : amount.toStringAsFixed(1);
-    return '$amountText $unit $name${isOptional ? ' (optional)' : ''}';
-  }
-}
 
-// models/nutrition_info.dart
-class NutritionInfo {
-  final int calories;
-  final double protein; // grams
-  final double carbs;   // grams
-  final double fat;     // grams
-  final double fiber;   // grams
-  final double sugar;   // grams
-  final double sodium;  // milligrams
-  
-  NutritionInfo({
-    required this.calories,
-    required this.protein,
-    required this.carbs,
-    required this.fat,
-    required this.fiber,
-    required this.sugar,
-    required this.sodium,
-  });
-  
-  NutritionInfo scale(double factor) {
-    return NutritionInfo(
-      calories: (calories * factor).round(),
-      protein: protein * factor,
-      carbs: carbs * factor,
-      fat: fat * factor,
-      fiber: fiber * factor,
-      sugar: sugar * factor,
-      sodium: sodium * factor,
-    );
-  }
-}
+
+

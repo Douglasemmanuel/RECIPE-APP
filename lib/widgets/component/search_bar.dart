@@ -1,4 +1,4 @@
-// widgets/component/search_bar_widget.dart
+
 import 'package:flutter/material.dart';
 
 class SearchBarWidget extends StatelessWidget {
