@@ -13,8 +13,21 @@ A Flutter-based recipe app that allows users to explore, save, and share their f
 
 ## Video Work Flow
 
-
+## MOBILE Work Flow
 [Download from Google Drive](https://drive.google.com/file/d/1jKW3BI0i01A6coKk9YO3dL7n3ylaTraB/view?usp=sharing)
+
+## DESKTOP Work Flow
+[Download from Goggle Drive](https://drive.google.com/file/d/1u8geVyORv9eHeLUYe4x1FHtg65gR2rUm/view?usp=sharing)
+
+
+
+
+
+
+## 🌐 Website
+
+Check out the full project at [Visit Our Website](https://recipe-app-j75dfxc-douglas-emmanuel.globeapp.dev/)
+
 
 
 ## Getting Started
