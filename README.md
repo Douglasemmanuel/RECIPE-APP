@@ -13,7 +13,8 @@ A Flutter-based recipe app that allows users to explore, save, and share their f
 
 ## Video Work Flow
 
-![Recipe Book App](https://drive.google.com/file/d/1jKW3BI0i01A6coKk9YO3dL7n3ylaTraB/view?usp=sharing)
+
+[Download from Google Drive](https://drive.google.com/file/d/1jKW3BI0i01A6coKk9YO3dL7n3ylaTraB/view?usp=sharing)
 
 
 ## Getting Started
